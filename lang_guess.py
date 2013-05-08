@@ -15,6 +15,14 @@ __author__  = "Eric Hildebrand <hildebrand.eric@gmail.com>"
 __version__ = "0.9"
 
 SEP = '#'
+        
+# Logger instance
+LOGGER         = logging.getLogger( __name__ )
+formatter      = logging.Formatter( '%(asctime)s\t%(levelname)s:\t%(message)s', '%Y-%m-%d %H:%M:%S' )
+consoleHandler = logging.StreamHandler( )
+consoleHandler.setFormatter( formatter )
+LOGGER.addHandler( consoleHandler )
+LOGGER.setLevel( logging.DEBUG )
 
 
 def getNGrams( term, n ):
@@ -159,14 +167,6 @@ def showHelp( ):
 def main( ):
     if len( sys.argv ) == 1 or '-h' in sys.argv:
         showHelp( )
-        
-    # Logger instance
-    LOGGER         = logging.getLogger( __name__ )
-    formatter      = logging.Formatter( '%(asctime)s\t%(levelname)s:\t%(message)s', '%Y-%m-%d %H:%M:%S' )
-    consoleHandler = logging.StreamHandler( )
-    consoleHandler.setFormatter( formatter )
-    LOGGER.addHandler( consoleHandler )
-    LOGGER.setLevel( logging.DEBUG )
     
     lang = sys.argv[sys.argv.index( '-l' ) + 1] if '-l' in sys.argv else 'en'
     n    = int( sys.argv[sys.argv.index( '-n' ) + 1] ) if '-n' in sys.argv else 2
